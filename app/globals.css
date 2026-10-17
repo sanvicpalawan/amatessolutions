@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Amates Solutions — design tokens
+   Dark "energy tech" surface, solar-amber accent, lagoon teal for system flow.
+   --------------------------------------------------------------------------- */
+
+@theme {
+  --color-ink: #070b14;
+  --color-ink-2: #0c1322;
+  --color-panel: #121b2e;
+  --color-panel-2: #17223a;
+  --color-line: #223052;
+  --color-solar: #ffb020;
+  --color-solar-2: #ff8a00;
+  --color-lagoon: #22d3c5;
+  --color-mist: #eef3fc;
+  --color-dim: #94a5c1;
+  --color-dim-2: #6b7d9c;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-mist);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-solar);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-solar);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* Solar-panel cell motif used behind the hero and as a texture on panels. */
+.panel-motif {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-line) 55%, transparent) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+.radial-fade {
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 75%);
+}
+
+.hairline {
+  border-color: color-mix(in oklab, var(--color-line) 85%, transparent);
+}
+
+/* Animated dash flow for the energy diagram paths. */
+@keyframes flow {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+.flow {
+  stroke-dasharray: 6 10;
+  animation: flow 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
